@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const data = require("../db/db.json");
 const path = require("path")
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
@@ -47,17 +46,17 @@ router.post('/', (req, res) => {
 //delete note
 router.delete('/:id', (req, res) => {
     const deleteNote = req.params.id
-    console.log("delete",deleteNote)
-    updatedData = []
+    //data being from the db.json being read to index over
+    let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"))
     for (i = 0; i < data.length; i++) {
-        if (data[i].noteId !== deleteNote) {
-            updatedData.push(data[i])
-            console.log(updatedData)
-            fs.writeFile('./db/db.json', JSON.stringify(updatedData), (error, res) => {
+        if (data[i].id === deleteNote) {
+            //removes item in the array that matches the id targeted
+            data.splice([i],1)
+            console.log("current data" ,data)
+            fs.writeFile('./db/db.json', JSON.stringify(data), (error) => {
                 if (error) throw error;
-                console.log(updatedData)
             });
-            res.json(updatedData);
+            res.json(data);
         }
     }
 });
