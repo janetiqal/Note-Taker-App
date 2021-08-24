@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const path = require("path")
 const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
 
@@ -23,6 +22,7 @@ router.post('/', (req, res) => {
             id: uuidv4()
         };
         const noteString = JSON.stringify(newNote);
+        //read json file after converting data to a string,so we can add to it
         fs.readFile('./db/db.json', "utf8", (err, notesString) => {
             if (err) {
                 console.log("We got an error in the readfile", err)
@@ -50,7 +50,7 @@ router.delete('/:id', (req, res) => {
     let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"))
     for (i = 0; i < data.length; i++) {
         if (data[i].id === deleteNote) {
-            //removes item in the array that matches the id targeted
+            //removes one item in the array that matches the id targeted
             data.splice([i],1)
             console.log("current data" ,data)
             fs.writeFile('./db/db.json', JSON.stringify(data), (error) => {
