@@ -12,6 +12,7 @@ This application has a front-end and a function back-end using Express.js. My ta
 The app is deployed by [Heroku](https://note-taker-appji.herokuapp.com/).
 ## Screen Shot
 <img width="1210" alt="Screen Shot 2021-08-23 at 10 28 30 PM" src="https://user-images.githubusercontent.com/84414488/130556375-1906a749-8afa-490a-b1db-37def0842553.png">
+
 ## Usage
 Run npm install after opening the server.js file in the terminal. 
 ## Credits
